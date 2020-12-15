@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/data.hpp
+map
+-
+string
+-
+
+/home/george/cgpiozero/test.cpp
+stdio.h
+-
+cstring
+-
+list
+-
+map
+-
+string
+-
+initializer_list
+-
+pigpiod_if2.h
+-
+iostream
+-
+data.hpp
+/home/george/cgpiozero/data.hpp
+

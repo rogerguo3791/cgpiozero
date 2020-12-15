@@ -1,0 +1,1 @@
+/bin/x86_64-linux-gnu-g++-9  -g   CMakeFiles/test.dir/test.cpp.o  -o test   -L/home/george/cgpiozero/lib  -Wl,-rpath,/home/george/cgpiozero/lib lib/libcgpiozero.a -lpigpiod_if2 -lpthread 
