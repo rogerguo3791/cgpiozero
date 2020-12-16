@@ -81,6 +81,6 @@ struct piBoardInfo_t
    header_t headers;
     
 };
-string format(const char *pszFmt, ...);
+
 piBoardInfo_t from_revision(uint32_t revision);
 #endif

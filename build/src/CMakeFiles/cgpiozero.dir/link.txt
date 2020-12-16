@@ -1,2 +1,2 @@
-/bin/ar qc ../lib/libcgpiozero.a  CMakeFiles/cgpiozero.dir/data.cpp.o CMakeFiles/cgpiozero.dir/devices.cpp.o CMakeFiles/cgpiozero.dir/mixins.cpp.o CMakeFiles/cgpiozero.dir/pi.cpp.o CMakeFiles/cgpiozero.dir/pin.cpp.o
+/bin/ar qc ../lib/libcgpiozero.a  CMakeFiles/cgpiozero.dir/data.cpp.o CMakeFiles/cgpiozero.dir/devices.cpp.o CMakeFiles/cgpiozero.dir/mixins.cpp.o CMakeFiles/cgpiozero.dir/pi.cpp.o CMakeFiles/cgpiozero.dir/pin.cpp.o CMakeFiles/cgpiozero.dir/utilities.cpp.o
 /bin/ranlib ../lib/libcgpiozero.a

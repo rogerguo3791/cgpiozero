@@ -1,0 +1,95 @@
+#pragma once
+#include <functional>
+template<class _T> class Property;
+template<class _T> class SetProperty;
+template<class T> class GetProperty {
+    private:
+        GetProperty();
+        GetProperty(const GetProperty&);
+        GetProperty(GetProperty&&)noexcept;
+        GetProperty& operator=(const GetProperty&);
+        GetProperty& operator=(GetProperty&&)noexcept;
+    protected:
+        std::function<T()> m_Get;
+    public:
+        friend Property<T>;
+        friend SetProperty<T>;
+        explicit GetProperty(std::function<T()> get):m_Get(get)
+        {
+        }
+        operator T()const{
+            return m_Get();
+        }
+        bool operator==(const GetProperty& r)const {
+            return m_Get() == r.m_Get();
+        }
+        bool operator==(GetProperty&& r)const noexcept {
+            return m_Get() == r.m_Get();
+        }
+};
+template<class T>class SetProperty{
+    private:
+        SetProperty();
+        SetProperty(const SetProperty&);
+        SetProperty(SetProperty&&)noexcept;
+        bool operator==(const SetProperty&)const;
+        bool operator==(SetProperty&&)const noexcept;
+    protected:
+        std::function<void(T)> m_Set;
+    public:
+        explicit SetProperty(std::function<void(T)> set):m_Set(set)
+        {
+        }
+        void operator=(T r) {
+            m_Set(r);
+        }
+        template<class _T>void operator=(const GetProperty<_T>& r){
+            m_Set(r.m_Get());
+        }
+        template<class _T>void operator=(GetProperty<_T>&& r)noexcept{
+            m_Set(r.m_Get());
+        }
+};
+template<class T>class Property{
+private:
+	Property();
+	Property(const Property&);
+	Property(Property&&)noexcept;
+protected:
+	std::function<T()> m_Get;
+	std::function<void(T)> m_Set;
+    public:
+        explicit Property(std::function<void(T)> set, std::function<T()> get):m_Get(get),m_Set(set)
+        {
+        }
+        operator T()const{
+            return m_Get();
+        }
+        bool operator==(const Property& r)const{
+            return m_Get() == r.m_Get();
+        }
+        bool operator==(Property&& r)const noexcept{
+            return m_Get() == r.m_Get();
+        }
+        template<class _T>bool operator==(const GetProperty<_T>& r)const{
+            return m_Get() == r.m_Get();
+        }
+        template<class _T>bool operator==(GetProperty<_T>&& r)const noexcept{
+            return m_Get() == r.m_Get();
+        }
+        void operator=(const Property& r){
+            m_Set(r.m_Get());
+        }
+        void operator=(Property&& r)noexcept{
+            m_Set(r.m_Get());
+        }
+        void operator=(T r){
+            m_Set(r);
+        }
+        template<class _T>void operator=(const GetProperty<_T>& r){
+            m_Set(r.m_Get());
+        }
+        template<class _T>void operator=(GetProperty<_T>&& r)noexcept{
+            m_Set(r.m_Get());
+        }
+};

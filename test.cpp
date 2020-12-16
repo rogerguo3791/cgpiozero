@@ -8,7 +8,8 @@
 #include <pigpiod_if2.h>
 #include <iostream>
 #include "data.hpp"
-
+#include "utilities.hpp"
+#include <functional>
 using namespace std;
 
 
@@ -136,10 +137,8 @@ void dict_test() {
 }
 map<int,string> reservations{{1,"dfd"},{2,"dfgg"}};
 
-#define READ_ONLY 1
-#define WRITE_ONLY 2
-#define READ_WRITE 3
-template <typename Container, typename ValueType, int nPropType>
+//template <typename Container, typename ValueType, int nPropType>
+/*
 class property
 {
         public:
@@ -219,17 +218,55 @@ class property
              int m_nCount;
 };
 
+
+class propertyTest {
+        private:
+                int num;
+                void set(int k) {
+                        num = k;
+                }
+                int get() {
+                        return num;
+                }
+        public:
+                Property<int> Num;
+                propertyTest():
+                        Num(bind(&propertyTest::set, this, std::placeholders::_1), bind(&propertyTest::get, this)),num(0)
+                {
+                }
+};
+*/
+
+
+class Test {
+        public:
+        Property<char *> s;    // int prop;
+        Property<int> prop;
+        void pt(){
+                prop =12;
+                
+            cout<<s<<":"<<prop<<endl;    
+        }
+        
+        };
+
 int main(int argc, char* argv[]){
        // pi_info();
        //list_test();
        // dict_test();
-        int i = 5,j;
+       Test t;
+        t.s="testd";
+        t.prop = 1;
+  
+        cout <<t.s<<"   "<<t.prop<<endl;
+        t.pt();
+        //propertyTest t;
+	//t.Num = 20;
+	//cout << t.Num << endl;
+	//t.Num = 100;
+	//cout << t.Num << endl;
+        // Basic usage, no override
         
-        PropTest test;
-        
-        test.Count = i;    //-- call the set method --
-        
-        j= test.Count;     //-- call the get method --
-        cout<<"i:"<<i<<"  "<<"j:"<<j<<endl;
+
     return 0;
 }

@@ -3,6 +3,7 @@
 
 src/CMakeFiles/cgpiozero.dir/data.cpp.o
  ../include/data.hpp
+ ../include/utilities.hpp
  /home/george/cgpiozero/src/data.cpp
 src/CMakeFiles/cgpiozero.dir/devices.cpp.o
  ../include/mixins.hpp
@@ -17,3 +18,5 @@ src/CMakeFiles/cgpiozero.dir/pi.cpp.o
 src/CMakeFiles/cgpiozero.dir/pin.cpp.o
  ../include/pin.hpp
  /home/george/cgpiozero/src/pin.cpp
+src/CMakeFiles/cgpiozero.dir/utilities.cpp.o
+ /home/george/cgpiozero/src/utilities.cpp

@@ -28,5 +28,10 @@
   "directory": "/home/george/cgpiozero/build/src",
   "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/george/cgpiozero/src/../include  -g   -o CMakeFiles/cgpiozero.dir/pin.cpp.o -c /home/george/cgpiozero/src/pin.cpp",
   "file": "/home/george/cgpiozero/src/pin.cpp"
+},
+{
+  "directory": "/home/george/cgpiozero/build/src",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/george/cgpiozero/src/../include  -g   -o CMakeFiles/cgpiozero.dir/utilities.cpp.o -c /home/george/cgpiozero/src/utilities.cpp",
+  "file": "/home/george/cgpiozero/src/utilities.cpp"
 }
 ]

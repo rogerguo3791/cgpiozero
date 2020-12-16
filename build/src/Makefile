@@ -260,6 +260,33 @@ pin.cpp.s:
 	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/pin.cpp.s
 .PHONY : pin.cpp.s
 
+utilities.o: utilities.cpp.o
+
+.PHONY : utilities.o
+
+# target to build an object file
+utilities.cpp.o:
+	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/utilities.cpp.o
+.PHONY : utilities.cpp.o
+
+utilities.i: utilities.cpp.i
+
+.PHONY : utilities.i
+
+# target to preprocess a source file
+utilities.cpp.i:
+	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/utilities.cpp.i
+.PHONY : utilities.cpp.i
+
+utilities.s: utilities.cpp.s
+
+.PHONY : utilities.s
+
+# target to generate assembly for a file
+utilities.cpp.s:
+	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/utilities.cpp.s
+.PHONY : utilities.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -284,6 +311,9 @@ help:
 	@echo "... pin.o"
 	@echo "... pin.i"
 	@echo "... pin.s"
+	@echo "... utilities.o"
+	@echo "... utilities.i"
+	@echo "... utilities.s"
 .PHONY : help
 
 

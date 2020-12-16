@@ -12,6 +12,22 @@ map
 string
 -
 
+../include/utilities.hpp
+stdio.h
+-
+stdlib.h
+-
+string
+-
+vector
+-
+data.hpp
+../include/data.hpp
+stdarg.h
+-
+functional
+-
+
 /home/george/cgpiozero/test.cpp
 stdio.h
 -
@@ -33,4 +49,8 @@ iostream
 -
 data.hpp
 /home/george/cgpiozero/data.hpp
+utilities.hpp
+/home/george/cgpiozero/utilities.hpp
+functional
+-
 

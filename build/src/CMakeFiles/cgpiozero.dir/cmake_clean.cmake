@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/cgpiozero.dir/mixins.cpp.o"
   "CMakeFiles/cgpiozero.dir/pi.cpp.o"
   "CMakeFiles/cgpiozero.dir/pin.cpp.o"
+  "CMakeFiles/cgpiozero.dir/utilities.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

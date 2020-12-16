@@ -3,32 +3,12 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "data.hpp"
 #include  <stdarg.h>
+#include "data.hpp"
+#include "utilities.hpp"
+
 using namespace std;
 
-/**
- * 格式化字符串
- * 
- * \param pszFmt 格式描述
- * \param ... 不定参数
- * \return 格式化的结果字符串
- */
-string format(const char *pszFmt, ...)
-{
-    std::string str;
-    va_list args;
-    va_start(args, pszFmt);
-    {
-        int nLength = vsnprintf(NULL,0,pszFmt, args);
-        nLength += 1;  //上面返回的长度是包含\0，这里加上
-        std::vector<char> chars(nLength);
-        vsnprintf(chars.data(), nLength, pszFmt, args);
-        str.assign(chars.data());
-    }
-    va_end(args);
-    return str;
-}
 
 revision_t REV1_P1{
               // pin  func   pullup    pin   func    pullup
@@ -172,7 +152,7 @@ piBoardInfo_t from_revision(uint32_t revision){
                         break;
                 }        
             else
-                PiBoardInfo.pcb_revision ="1.%d" , revcode_revision;
+                PiBoardInfo.pcb_revision =format("1.%d" , revcode_revision);
             switch (revcode_processor)
             {
                 case 0:
@@ -330,7 +310,7 @@ piBoardInfo_t from_revision(uint32_t revision){
         }
         else
         {
-            throw("unknown old-style revision %d", revision);
+            throw(format("unknown old-style revision %d", revision));
         }
         
         return PiBoardInfo;
