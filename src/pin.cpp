@@ -3,13 +3,65 @@
 #include <stdint.h>
 #include <map>
 #include <cstring>
-#include <pigpio.h>
-#include "pin.hpp"
+#include "utilities.h"
+#include <pigpiod_if2.h>
+#include <iostream>
+#include "pin.h"
+#include "Property.h"
 using namespace std;
+/*
+    class Pin
+    {
+        private:
+            const char* function ; //引脚功能
+            unsigned    state;     //引脚状态
+            unsigned    pull;      //上拉双胎
+            unsigned    bounce;    //边界出发范围 
+            const char* edges;     //边沿检测 
+        
+        public:
+            Pin();
+            virtual ~Pin(){};
+            void close();
+            int output_with_state(unsigned state);
+            int input_with_pull(unsigned pull);
+            char * get_function();
+            void set_function(char* value);
+            unsigned get_state();
+            void set_state(unsigned value);
+            char*  get_pull();
+            void set_pull(char*  value);
+            unsigned get_frequency();
+            void set_frequency(unsigned value);
+            unsigned get_bounce();
+            void set_bounce(unsigned value);
+            char*  get_edges();
+            void set_edges(char*  value);
+            eventFunc_t  get_when_changed();
+            void set_when_changed(eventFunc_t value);
+    };
+    */
 
 Pin::Pin()
 {
-    
+    /*
+    private:
+            const char* function ; //引脚功能
+            unsigned    state;     //引脚状态
+            unsigned    pull;      //上拉双胎
+            unsigned    bounce;    //边界出发范围 
+            const char* edges;     //边沿检测 
+            */
+       function = Property<string>::of(this, &Pin::_get_function, &Pin::_set_function);
+       state    = Property<int>::of(this, &Pin::_get_state,    &Pin::_set_state);
+       pull     = Property<string>::of(this, &Pin::_get_pull, &Pin::_set_pull);
+       frequency= Property<unsigned>::of(this, &Pin::_get_frequency, &Pin::_set_frequency);
+       bounce   = Property<unsigned>::of(this, &Pin::_get_bounce, &Pin::_set_bounce);
+       edges    = Property<string>::of(this, &Pin::_get_edges, &Pin::_set_edges);
+       when_changed= Property<CBFunc_t>::of(this, &Pin::_get_when_changed, 
+                                                 &Pin::_set_when_changed);
+
+
 }
 
 void Pin::close()
@@ -21,55 +73,57 @@ void Pin::close()
        //return 0;
    }
 
-int Pin::output_with_state(unsigned state){
+int Pin::output_with_state(int state){
         
         this->function = "output";
         this->state = state;
         return 0;
     }
-int Pin::input_with_pull(unsigned pull){
+int Pin::input_with_pull(string value){
         this->function = "input";
-        this->pull = pull;
+        this->pull = value;
         return 0;
     }
 
-char * Pin::get_function(){
-        return (char*)"input";
+string  Pin::_get_function() const{
+       // return "input";
+       return this->_function;
     }
 
-void Pin::set_function(char * value){
+void Pin::_set_function(const string& value){
         
-        if( value != "input") 
-           throw ("Cannot set the function of pin %r to %d",value );
+       // if( value != "input") 
+       //    throw (format_str("Cannot set the function of pin to %s",value) );
+       this->_function = value;
     }
 
-unsigned Pin::get_state() {
-        return 0 ;
+int Pin::_get_state() const {
+        return this->_state ;
     }
 
-void Pin::set_state(unsigned value){
-        throw ("Cannot set the state of input pin %d" , value);
+void Pin::_set_state(const int& value){
+        this->_state = value;
     }
 
-char* Pin::get_pull(){
-        return (char*)"floating";
+string Pin::_get_pull()const {
+        return "floating";
     }
-void Pin::set_pull(char*  value){
-        throw ("Cannot change pull-up on pin %s" ,value);
+void Pin::_set_pull(const string&  value){
+        throw (format_str("Cannot change pull-up on pin %s" ,value));
     }
-unsigned Pin::get_frequency(){
-        return 0;
+unsigned Pin::_get_frequency() const {
+        return -1;
     }
  
-void Pin::set_frequency(unsigned value){
+void Pin::_set_frequency(const unsigned& value){
         if (value != 0)
             throw ("PWM is not supported on pin ");
     }
-unsigned Pin::get_bounce(){
-        return None;
+unsigned Pin::_get_bounce()const {
+        return 0;
     }
-void Pin::set_bounce(unsigned value){
-        if (value != None)
+void Pin::_set_bounce(const unsigned& value){
+        if (value != 0)
             throw("Edge detection is not supported on pin");
 
     /*
@@ -105,12 +159,11 @@ void Pin::set_bounce(unsigned value){
         """)
     */
     }
-char* Pin::get_edges(){
-        return (char*)"none";
+string Pin::_get_edges() const {
+        return "none";
     }
-void Pin::set_edges(char* value){
-        throw(
-            "Edge detection is not supported on pin \r" );
+void Pin::_set_edges(const string& value){
+        throw("Edge detection is not supported on pin " );
     }
     /*
     edges = property
@@ -135,11 +188,11 @@ void Pin::set_edges(char* value){
         """)
     */
     
-unsigned  Pin::get_when_changed() {
-        return 0;
+CBFunc_t  Pin::_get_when_changed() const {
+        return nullptr;
     }
 
-void Pin::set_when_changed(eventFunc_t value){
+void Pin::_set_when_changed(const CBFunc_t & value){
         throw ("Edge detection is not supported on pin \n");
     }
     /*
@@ -169,7 +222,10 @@ void Pin::set_when_changed(eventFunc_t value){
 
 Factory::Factory(){
         /*
-    """
+       private:
+                map<int,string> reservations;
+                uint32_t _ticks;
+               
         这是pin工厂的抽象基类，用于为devices生成pins和SPI接口
         派生类必须重载下列方法：
         methods:
@@ -194,7 +250,7 @@ Factory::Factory(){
 }
 
 
-void Factory::reserve_pins(char *requester, initializer_list<int> pins){
+void Factory::reserve_pins(const char * requester, initializer_list<int> pins){
     
          //map<int ,string> ::iterator iter;  //迭代器
     
@@ -207,7 +263,13 @@ void Factory::reserve_pins(char *requester, initializer_list<int> pins){
         }
 }
 
-void Factory::release_pins( char *reserver, initializer_list<int> pins){
+void Factory::show_reserved_pins(){
+    
+    for (map<int ,string>::iterator it = this->reservations.begin(); it != this->reservations.end(); ++it) 
+        cout<<it->first<<":"<<it->second<<endl;
+}
+
+void Factory::release_pins(const char *  reserver, initializer_list<int> pins){
         /*"""
         Releases the reservation of *reserver* against *pins*.  This is
         typically called during :meth:`~gpiozero.Device.close` to clean up
@@ -227,10 +289,10 @@ void Factory::release_pins( char *reserver, initializer_list<int> pins){
         }
 
 }
- void  Factory::release_all(char *reserver){
+ void  Factory::release_all(const char * reserver){
      for(map<int ,string > ::iterator iter=this->reservations.begin();iter!=this->reservations.end();iter++)  
            {
-               printf("%d -> %s\n",iter->first,(char*)iter->second.c_str());
+              // printf("%d -> %s\n",iter->first,iter->second.c_str());
                // delete iter->second) ; //将来考虑要删除对象实例
            }     
  }
@@ -244,12 +306,12 @@ void Factory::close()
         */    
     }
         
-Pin Factory::pin(int spec){
+Pin* Factory::pin(int spec){
         /*
         Creates an instance of a :class:`Pin` descendent representing the
         specified pin.
 
-        .. warning::
+    *    .. warning::
 
             Descendents must ensure that pin instances representing the same
             hardware are identical; i.e. two separate invocations of
@@ -257,6 +319,7 @@ Pin Factory::pin(int spec){
             object.
         */
         throw("Individual pins are not supported by this pin factory");
+        return NULL;
 }
 
 void  Factory::spi(char  **spi_args){
@@ -296,7 +359,7 @@ uint32_t  Factory::ticks(){
 
 
 
- int   Factory::get_pi_info(){
+ piBoardInfo_t   Factory::get_pi_info(){
         /*
         doc="""\
         Returns a :class:`PiBoardInfo` instance representing the Pi that
@@ -307,7 +370,9 @@ uint32_t  Factory::ticks(){
         are not on a Pi at all), this may return :data:`None`.
         """)
         */
-        return 0;
+        piBoardInfo_t piBoardInfo;
+        
+        return piBoardInfo;
     }
 
 

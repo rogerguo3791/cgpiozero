@@ -1,11 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <map>
 #include <string>
 #include <vector>
 #include <stdarg.h>
-#include <functional>
-
 
 using namespace std;
 
@@ -16,7 +11,7 @@ using namespace std;
  * \param ... 不定参数
  * \return 格式化的结果字符串
  */
-string format(const char *pszFmt, ...)
+string format_str(const char *pszFmt, ...)
 {
     std::string str;
     va_list args;

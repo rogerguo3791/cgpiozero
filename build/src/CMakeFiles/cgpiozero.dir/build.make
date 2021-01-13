@@ -96,18 +96,18 @@ src/CMakeFiles/cgpiozero.dir/mixins.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgpiozero.dir/mixins.cpp.s"
 	cd /home/george/cgpiozero/build/src && /bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/george/cgpiozero/src/mixins.cpp -o CMakeFiles/cgpiozero.dir/mixins.cpp.s
 
-src/CMakeFiles/cgpiozero.dir/pi.cpp.o: src/CMakeFiles/cgpiozero.dir/flags.make
-src/CMakeFiles/cgpiozero.dir/pi.cpp.o: ../src/pi.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/george/cgpiozero/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/cgpiozero.dir/pi.cpp.o"
-	cd /home/george/cgpiozero/build/src && /bin/x86_64-linux-gnu-g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cgpiozero.dir/pi.cpp.o -c /home/george/cgpiozero/src/pi.cpp
+src/CMakeFiles/cgpiozero.dir/pigpio.cpp.o: src/CMakeFiles/cgpiozero.dir/flags.make
+src/CMakeFiles/cgpiozero.dir/pigpio.cpp.o: ../src/pigpio.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/george/cgpiozero/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/cgpiozero.dir/pigpio.cpp.o"
+	cd /home/george/cgpiozero/build/src && /bin/x86_64-linux-gnu-g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cgpiozero.dir/pigpio.cpp.o -c /home/george/cgpiozero/src/pigpio.cpp
 
-src/CMakeFiles/cgpiozero.dir/pi.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgpiozero.dir/pi.cpp.i"
-	cd /home/george/cgpiozero/build/src && /bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/george/cgpiozero/src/pi.cpp > CMakeFiles/cgpiozero.dir/pi.cpp.i
+src/CMakeFiles/cgpiozero.dir/pigpio.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cgpiozero.dir/pigpio.cpp.i"
+	cd /home/george/cgpiozero/build/src && /bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/george/cgpiozero/src/pigpio.cpp > CMakeFiles/cgpiozero.dir/pigpio.cpp.i
 
-src/CMakeFiles/cgpiozero.dir/pi.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgpiozero.dir/pi.cpp.s"
-	cd /home/george/cgpiozero/build/src && /bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/george/cgpiozero/src/pi.cpp -o CMakeFiles/cgpiozero.dir/pi.cpp.s
+src/CMakeFiles/cgpiozero.dir/pigpio.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cgpiozero.dir/pigpio.cpp.s"
+	cd /home/george/cgpiozero/build/src && /bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/george/cgpiozero/src/pigpio.cpp -o CMakeFiles/cgpiozero.dir/pigpio.cpp.s
 
 src/CMakeFiles/cgpiozero.dir/pin.cpp.o: src/CMakeFiles/cgpiozero.dir/flags.make
 src/CMakeFiles/cgpiozero.dir/pin.cpp.o: ../src/pin.cpp
@@ -140,7 +140,7 @@ cgpiozero_OBJECTS = \
 "CMakeFiles/cgpiozero.dir/data.cpp.o" \
 "CMakeFiles/cgpiozero.dir/devices.cpp.o" \
 "CMakeFiles/cgpiozero.dir/mixins.cpp.o" \
-"CMakeFiles/cgpiozero.dir/pi.cpp.o" \
+"CMakeFiles/cgpiozero.dir/pigpio.cpp.o" \
 "CMakeFiles/cgpiozero.dir/pin.cpp.o" \
 "CMakeFiles/cgpiozero.dir/utilities.cpp.o"
 
@@ -150,7 +150,7 @@ cgpiozero_EXTERNAL_OBJECTS =
 lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/data.cpp.o
 lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/devices.cpp.o
 lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/mixins.cpp.o
-lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/pi.cpp.o
+lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/pigpio.cpp.o
 lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/pin.cpp.o
 lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/utilities.cpp.o
 lib/libcgpiozero.a: src/CMakeFiles/cgpiozero.dir/build.make

@@ -6,13 +6,35 @@
 
 #IncludeRegexTransform: 
 
+../include/Property.h
+functional
+-
+
 ../include/data.hpp
 map
 -
 string
 -
 
-../include/utilities.hpp
+../include/pigpio.hpp
+string
+-
+pin.h
+../include/pin.h
+
+../include/pin.h
+string
+-
+map
+-
+pigpiod_if2.h
+-
+data.hpp
+../include/data.hpp
+Property.h
+../include/Property.h
+
+../include/utilities.h
 stdio.h
 -
 stdlib.h
@@ -28,8 +50,12 @@ stdarg.h
 functional
 -
 
+/home/george/cgpiozero/PropertyTest.h
+
 /home/george/cgpiozero/test.cpp
 stdio.h
+-
+stdlib.h
 -
 cstring
 -
@@ -49,8 +75,16 @@ iostream
 -
 data.hpp
 /home/george/cgpiozero/data.hpp
-utilities.hpp
-/home/george/cgpiozero/utilities.hpp
 functional
 -
+pthread.h
+-
+pigpio.hpp
+/home/george/cgpiozero/pigpio.hpp
+signal.h
+-
+utilities.h
+/home/george/cgpiozero/utilities.h
+PropertyTest.h
+/home/george/cgpiozero/PropertyTest.h
 

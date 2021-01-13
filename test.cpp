@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <cstring>
 #include <list>
 #include <map>
@@ -8,15 +9,32 @@
 #include <pigpiod_if2.h>
 #include <iostream>
 #include "data.hpp"
-#include "utilities.hpp"
-#include <functional>
-using namespace std;
 
+#include <functional>
+#include <pthread.h>
+#include "pigpio.hpp"
+#include <signal.h>
+
+#include "utilities.h"
+#include "PropertyTest.h"
+using namespace std;
+//using property::Property;
 
 
 /*
         gcc -Wall -pthread -o RED test_RED.c RED.c -lpigpiod_if2
 */
+typedef void (*signalFunc_t) (int signum);
+
+static void setSignalHandler(int signum, signalFunc_t sigHandler)
+{
+   struct sigaction New;
+
+   memset(&New, 0, sizeof(New));
+   New.sa_handler = sigHandler;
+
+   sigaction(signum, &New, NULL);
+}
 
 void pi_info()
 {
@@ -137,136 +155,184 @@ void dict_test() {
 }
 map<int,string> reservations{{1,"dfd"},{2,"dfgg"}};
 
-//template <typename Container, typename ValueType, int nPropType>
-/*
-class property
+
+struct thread_data{
+   int  thread_id;
+   char *message;
+};
+ 
+ 
+void *PrintHello(void *threadarg)
 {
-        public:
-                property(){  
-                 m_cObject = NULL;       
-                       Set = NULL;
-                       Get = NULL;
-                }
+   struct thread_data *my_data;
  
-        //-- This to set a pointer to the class that contain the
-        //   property --
+   my_data = (struct thread_data *) threadarg;
  
-        void setContainer(Container* cObject){
-                m_cObject = cObject;
-        }
- 
-        //-- Set the set member function that will change the value --
-        void setter(void (Container::*pSet)(ValueType value)){
-                if((nPropType == WRITE_ONLY) || (nPropType == READ_WRITE))
-                        Set = pSet;
-                else
-                        Set = NULL;
-        }
- 
-                //-- Set the get member function that will retrieve the value --
-        void getter(ValueType (Container::*pGet)()){
-                if((nPropType == READ_ONLY) || (nPropType == READ_WRITE))
-                        Get = pGet;
-                else
-                        Get = NULL;
-        }
- 
-        //-- Overload the '=' sign to set the value using the set
-        //   member --
- 
-        ValueType operator =(const ValueType& value){
-                assert(m_cObject != NULL);
-                assert(Set != NULL);
-                (m_cObject->*Set)(value);
-                return value;
-        }
- 
-        //-- To make possible to cast the property class to the
-        //   internal type --
- 
-        operator ValueType(){
-                assert(m_cObject != NULL);
-                assert(Get != NULL);
-                return (m_cObject->*Get)();
-        }
-        private:
-        Container* m_cObject;  //-- Pointer to the module that
-                                //   contains the property --
-        void (Container::*Set)(ValueType value);
-                                //-- Pointer to set member function --
-        ValueType (Container::*Get)();
-                                //-- Pointer to get member function --
- };
+   cout << "Thread ID : " << my_data->thread_id ;
+   cout << " Message : " << my_data->message << endl;
 
- class PropTest{
-         public:
+   pthread_exit(NULL);
+}
+
+void   threadtest()
+{
+     #define NUM_THREADS     5
+   pthread_t threads[NUM_THREADS];
+   struct thread_data td[NUM_THREADS];
+   int rc;
+   int i;
  
-        PropTest(){
-                Count.setContainer(this);
-                Count.setter(&PropTest::setCount); 
-                Count.getter(&PropTest::getCount);
-        }
-   int getCount()  {
-     return m_nCount;
+   for( i=0; i < NUM_THREADS; i++ ){
+      cout <<"main() : creating thread, " << i << endl;
+      td[i].thread_id = i;
+      td[i].message = (char*)"This is message";
+      rc = pthread_create(&threads[i], NULL,
+                          PrintHello, (void *)&td[i]);
+      if (rc){
+         cout << "Error:unable to create thread," << rc << endl;
+         exit;
+      }
    }
+   pthread_exit(NULL);   
+}
  
-  void setCount(int nCount){
-     m_nCount = nCount;
-   }
-   property<PropTest,int,READ_WRITE> Count;
-        private:
-             int m_nCount;
-};
+void piclass_test(){
+        PiGPIOFactory* fa = new PiGPIOFactory(NULL,NULL) ;
+        PiGPIOPin* p;
+        piBoardInfo_t piBoardInfo;
+        cout<<fa->host()<<" : "<<fa->port()<<endl;
+        cout<<"Current ticks:"<<fa->ticks()<<endl;
+        piBoardInfo=fa->get_pi_info();
+        cout<<"model is "<<piBoardInfo.model<<endl;
+        cout<<"revision is "<<piBoardInfo.revision<<endl;
+        cout<<"memory is "<<piBoardInfo.memory<<endl;
+        cout<<"soc is "<<piBoardInfo.soc<<endl;
+        cout<<"released is "<<piBoardInfo.released<<endl;
+        cout<<"manufacturer "<<piBoardInfo.manufacturer<<endl;
+        cout<<"usb is "<<piBoardInfo.usb<<endl;
+        cout<<"wifi is "<<piBoardInfo.wifi<<endl;
+        cout<<"bluetooth is "<<piBoardInfo.bluetooth<<endl;
+        cout<<"csi is "<<piBoardInfo.csi<<endl;
+        cout<<"dsi is "<<piBoardInfo.dsi<<endl;
+        cout<<"storage is "<<piBoardInfo.storage<<endl;
+        cout<<"ethernet is "<<piBoardInfo.ethernet<<endl;
+/*  functional test */
+       // functest();
+       fa->reserve_pins( "test",{24,25,26});
+       fa->show_reserved_pins();
+       p=(PiGPIOPin*)fa->pin(24);
+   
+        cout<<"pi: "<<p->pi<<endl;
+       cout<<"pin Number :"<<p->number()<<endl;
+       
 
+       cout<<"func:"<< (string)p->function  <<endl;
 
-class propertyTest {
-        private:
-                int num;
-                void set(int k) {
-                        num = k;
-                }
-                int get() {
-                        return num;
-                }
-        public:
-                Property<int> Num;
-                propertyTest():
-                        Num(bind(&propertyTest::set, this, std::placeholders::_1), bind(&propertyTest::get, this)),num(0)
-                {
-                }
-};
-*/
+       cout<<"state: "<<p->state<<endl;
 
-
-class Test {
-        public:
-        Property<char *> s;    // int prop;
-        Property<int> prop;
-        void pt(){
-                prop =12;
-                
-            cout<<s<<":"<<prop<<endl;    
-        }
+       p->function ="output";
+       p->state =0 ;
+       cout<<"pull:" <<(string)p->pull<<endl;
+       cout<<"edges:" <<(string)p->edges<<endl;
         
-        };
+       //fa->release_pins( "test",{24,25,26});
+       // fa->show_reserved_pins();
+        
+       fa->close(); 
+       
+       delete fa;
+}
 
+class Func
+    {
+    public:
+        int sum;
+        Func()   {
+            sum = 2;
+        }
+        void func2(int numa, int numb, int numc,std::string name) {
+            std::cout << numa << " " << numb << " " << numc<<" " << name<< endl ;
+        }
+        void func4()  {
+            std::cout << "func4" << endl;
+        }
+        void operator() (int a,int b)   {
+            std::cout << "Operator:" << sum<<"  "<<a<<"  "<<b<<endl;
+        }
+        static void  func6(int numa, int numb, int numc)        {
+            std::cout << numa << " " << numb << " " << numc << endl;
+        }
+        static void  func5()        {
+            std::cout << "static func" << endl;
+        }
+    };
+
+
+void func3()  {
+         std::cout <<"func3"<< endl;
+     }
+void func1(int numa, int numb, int numc)     {
+         std::cout << numa << " " << numb << " " << numc << endl;
+     }
+
+void callFunc(std::function<void(int a,int b)> call)  {
+         call(1,2);
+     }
+
+void functest(){
+        Func func;
+        int sum = 10;
+        int resultInt = 0;
+        //全局或者静态函数
+        std::cout << "全局或者静态函数" << endl;
+        std::function<void()> testFunc = func3;
+        testFunc();
+        testFunc = Func::func5;
+        testFunc();
+        //类成员函数
+        std::cout << "类成员函数" << endl;
+        testFunc = std::bind(&Func::func2, func, 1, 2, 3, "name");
+        testFunc();
+        //Lambda表达式
+        std::cout << "Lambda表达式" << endl;
+        testFunc = [=, &resultInt](){std::cout << sum << endl; resultInt += 100; };
+        testFunc();
+        cout << "the reslutInt is " << resultInt << endl;
+        //仿函数
+        std::cout << "仿函数" << endl;
+        std::function<void(int a, int b)> abFunc = func;
+        abFunc(10, 20);
+        std::cout << resultInt << std::endl;
+
+       callFunc(std::bind(func1, std::placeholders::_1, std::placeholders::_2, 3));
+       callFunc(std::bind(func1, std::placeholders::_2, std::placeholders::_1, 3));
+       callFunc(std::bind(func1, std::placeholders::_2, 3, std::placeholders::_1));
+       callFunc(std::bind(Func::func6, std::placeholders::_1, std::placeholders::_2, 3));
+       callFunc(std::bind(&Func::func2, func, std::placeholders::_1, std::placeholders::_2, 3, "name"));
+}
 int main(int argc, char* argv[]){
-       // pi_info();
+        
+      //pi_info();
        //list_test();
        // dict_test();
-       Test t;
-        t.s="testd";
-        t.prop = 1;
-  
-        cout <<t.s<<"   "<<t.prop<<endl;
-        t.pt();
+      
+        
+        //PropertyTest();
+        //cout <<t.s<<"   "<<t.prop<<endl;
+        //t.pt();
         //propertyTest t;
 	//t.Num = 20;
 	//cout << t.Num << endl;
 	//t.Num = 100;
 	//cout << t.Num << endl;
         // Basic usage, no override
-        
+
+        //threadtest();
+        //piclass_test();
+    //char* host = getenv("PIGPIO_ADDR");
+    //char* port = getenv("PIGPIO_PORT");
+    //cout <<host<<" : "<<port<<endl;
+     piclass_test();
 
     return 0;
 }

@@ -136,6 +136,33 @@ cgpiozero/fast:
 	$(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/build
 .PHONY : cgpiozero/fast
 
+PropertyTest.o: PropertyTest.cpp.o
+
+.PHONY : PropertyTest.o
+
+# target to build an object file
+PropertyTest.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/PropertyTest.cpp.o
+.PHONY : PropertyTest.cpp.o
+
+PropertyTest.i: PropertyTest.cpp.i
+
+.PHONY : PropertyTest.i
+
+# target to preprocess a source file
+PropertyTest.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/PropertyTest.cpp.i
+.PHONY : PropertyTest.cpp.i
+
+PropertyTest.s: PropertyTest.cpp.s
+
+.PHONY : PropertyTest.s
+
+# target to generate assembly for a file
+PropertyTest.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/PropertyTest.cpp.s
+.PHONY : PropertyTest.cpp.s
+
 test.o: test.cpp.o
 
 .PHONY : test.o
@@ -173,6 +200,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... cgpiozero"
+	@echo "... PropertyTest.o"
+	@echo "... PropertyTest.i"
+	@echo "... PropertyTest.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"

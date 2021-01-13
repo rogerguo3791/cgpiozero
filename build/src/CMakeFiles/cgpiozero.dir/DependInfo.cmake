@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/george/cgpiozero/src/data.cpp" "/home/george/cgpiozero/build/src/CMakeFiles/cgpiozero.dir/data.cpp.o"
   "/home/george/cgpiozero/src/devices.cpp" "/home/george/cgpiozero/build/src/CMakeFiles/cgpiozero.dir/devices.cpp.o"
   "/home/george/cgpiozero/src/mixins.cpp" "/home/george/cgpiozero/build/src/CMakeFiles/cgpiozero.dir/mixins.cpp.o"
-  "/home/george/cgpiozero/src/pi.cpp" "/home/george/cgpiozero/build/src/CMakeFiles/cgpiozero.dir/pi.cpp.o"
+  "/home/george/cgpiozero/src/pigpio.cpp" "/home/george/cgpiozero/build/src/CMakeFiles/cgpiozero.dir/pigpio.cpp.o"
   "/home/george/cgpiozero/src/pin.cpp" "/home/george/cgpiozero/build/src/CMakeFiles/cgpiozero.dir/pin.cpp.o"
   "/home/george/cgpiozero/src/utilities.cpp" "/home/george/cgpiozero/build/src/CMakeFiles/cgpiozero.dir/utilities.cpp.o"
   )

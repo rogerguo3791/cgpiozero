@@ -3,20 +3,30 @@
 
 src/CMakeFiles/cgpiozero.dir/data.cpp.o
  ../include/data.hpp
- ../include/utilities.hpp
+ ../include/utilities.h
  /home/george/cgpiozero/src/data.cpp
 src/CMakeFiles/cgpiozero.dir/devices.cpp.o
+ ../include/Property.h
+ ../include/data.hpp
+ ../include/devices.hpp
  ../include/mixins.hpp
- ../include/pin.hpp
+ ../include/pin.h
+ ../include/utilities.h
  /home/george/cgpiozero/src/devices.cpp
 src/CMakeFiles/cgpiozero.dir/mixins.cpp.o
- ../include/mixins.hpp
  /home/george/cgpiozero/src/mixins.cpp
-src/CMakeFiles/cgpiozero.dir/pi.cpp.o
- ../include/pin.hpp
- /home/george/cgpiozero/src/pi.cpp
+src/CMakeFiles/cgpiozero.dir/pigpio.cpp.o
+ ../include/Property.h
+ ../include/data.hpp
+ ../include/pigpio.hpp
+ ../include/pin.h
+ ../include/utilities.h
+ /home/george/cgpiozero/src/pigpio.cpp
 src/CMakeFiles/cgpiozero.dir/pin.cpp.o
- ../include/pin.hpp
+ ../include/Property.h
+ ../include/data.hpp
+ ../include/pin.h
+ ../include/utilities.h
  /home/george/cgpiozero/src/pin.cpp
 src/CMakeFiles/cgpiozero.dir/utilities.cpp.o
  /home/george/cgpiozero/src/utilities.cpp

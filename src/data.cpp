@@ -5,7 +5,7 @@
 #include <vector>
 #include  <stdarg.h>
 #include "data.hpp"
-#include "utilities.hpp"
+#include "utilities.h"
 
 using namespace std;
 
@@ -152,7 +152,7 @@ piBoardInfo_t from_revision(uint32_t revision){
                         break;
                 }        
             else
-                PiBoardInfo.pcb_revision =format("1.%d" , revcode_revision);
+                PiBoardInfo.pcb_revision =format_str("1.%d" , revcode_revision);
             switch (revcode_processor)
             {
                 case 0:
@@ -292,7 +292,7 @@ piBoardInfo_t from_revision(uint32_t revision){
             PiBoardInfo.csi =1;
             PiBoardInfo.dsi =1;
             
-            PiBoardInfo.revision=format("%04x",revision);
+            PiBoardInfo.revision=format_str("%04x",revision);
             switch (revcode_type)
             {
                 case 0:
@@ -310,7 +310,7 @@ piBoardInfo_t from_revision(uint32_t revision){
         }
         else
         {
-            throw(format("unknown old-style revision %d", revision));
+            throw(format_str("unknown old-style revision %d", revision));
         }
         
         return PiBoardInfo;

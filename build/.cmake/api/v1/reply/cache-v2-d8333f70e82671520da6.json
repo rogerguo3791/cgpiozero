@@ -2,6 +2,30 @@
 	"entries" : 
 	[
 		{
+			"name" : "CGPIOZERO_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/george/cgpiozero/build"
+		},
+		{
+			"name" : "CGPIOZERO_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/george/cgpiozero"
+		},
+		{
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -887,7 +911,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "HELLO"
+			"value" : "CGPIOZERO"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1180,30 +1204,6 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "[TRUE][v()]"
-		},
-		{
-			"name" : "HELLO_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/george/cgpiozero/build"
-		},
-		{
-			"name" : "HELLO_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/george/cgpiozero"
 		},
 		{
 			"name" : "LIB_BINARY_DIR",

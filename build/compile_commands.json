@@ -1,6 +1,11 @@
 [
 {
   "directory": "/home/george/cgpiozero/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/george/cgpiozero/include  -g   -o CMakeFiles/test.dir/PropertyTest.cpp.o -c /home/george/cgpiozero/PropertyTest.cpp",
+  "file": "/home/george/cgpiozero/PropertyTest.cpp"
+},
+{
+  "directory": "/home/george/cgpiozero/build",
   "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/george/cgpiozero/include  -g   -o CMakeFiles/test.dir/test.cpp.o -c /home/george/cgpiozero/test.cpp",
   "file": "/home/george/cgpiozero/test.cpp"
 },
@@ -21,8 +26,8 @@
 },
 {
   "directory": "/home/george/cgpiozero/build/src",
-  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/george/cgpiozero/src/../include  -g   -o CMakeFiles/cgpiozero.dir/pi.cpp.o -c /home/george/cgpiozero/src/pi.cpp",
-  "file": "/home/george/cgpiozero/src/pi.cpp"
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/george/cgpiozero/src/../include  -g   -o CMakeFiles/cgpiozero.dir/pigpio.cpp.o -c /home/george/cgpiozero/src/pigpio.cpp",
+  "file": "/home/george/cgpiozero/src/pigpio.cpp"
 },
 {
   "directory": "/home/george/cgpiozero/build/src",

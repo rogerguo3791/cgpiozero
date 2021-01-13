@@ -206,32 +206,32 @@ mixins.cpp.s:
 	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/mixins.cpp.s
 .PHONY : mixins.cpp.s
 
-pi.o: pi.cpp.o
+pigpio.o: pigpio.cpp.o
 
-.PHONY : pi.o
+.PHONY : pigpio.o
 
 # target to build an object file
-pi.cpp.o:
-	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/pi.cpp.o
-.PHONY : pi.cpp.o
+pigpio.cpp.o:
+	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/pigpio.cpp.o
+.PHONY : pigpio.cpp.o
 
-pi.i: pi.cpp.i
+pigpio.i: pigpio.cpp.i
 
-.PHONY : pi.i
+.PHONY : pigpio.i
 
 # target to preprocess a source file
-pi.cpp.i:
-	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/pi.cpp.i
-.PHONY : pi.cpp.i
+pigpio.cpp.i:
+	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/pigpio.cpp.i
+.PHONY : pigpio.cpp.i
 
-pi.s: pi.cpp.s
+pigpio.s: pigpio.cpp.s
 
-.PHONY : pi.s
+.PHONY : pigpio.s
 
 # target to generate assembly for a file
-pi.cpp.s:
-	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/pi.cpp.s
-.PHONY : pi.cpp.s
+pigpio.cpp.s:
+	cd /home/george/cgpiozero/build && $(MAKE) -f src/CMakeFiles/cgpiozero.dir/build.make src/CMakeFiles/cgpiozero.dir/pigpio.cpp.s
+.PHONY : pigpio.cpp.s
 
 pin.o: pin.cpp.o
 
@@ -305,9 +305,9 @@ help:
 	@echo "... mixins.o"
 	@echo "... mixins.i"
 	@echo "... mixins.s"
-	@echo "... pi.o"
-	@echo "... pi.i"
-	@echo "... pi.s"
+	@echo "... pigpio.o"
+	@echo "... pigpio.i"
+	@echo "... pigpio.s"
 	@echo "... pin.o"
 	@echo "... pin.i"
 	@echo "... pin.s"
